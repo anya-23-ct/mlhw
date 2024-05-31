@@ -1,2 +1,2 @@
 # mlhw
-projects for machine learning hardware and systems
+projects for machine learning hardware and systems @ CT
