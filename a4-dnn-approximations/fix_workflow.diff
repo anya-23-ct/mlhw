@@ -1,0 +1,63 @@
+diff --git a/.github/classroom/autograding.json b/.github/classroom/autograding.json
+new file mode 100644
+index 0000000..77f41df
+--- /dev/null
++++ b/.github/classroom/autograding.json
+@@ -0,0 +1,13 @@
++{
++  "tests": [
++    {
++      "name": "a4_tests",
++      "setup": "sudo -H pip3 install pytest torch numpy",
++      "run": "python -m pytest tests/*",
++      "input": "",
++      "output": "",
++      "comparison": "included",
++      "timeout": 30
++    }
++  ]
++}
+\ No newline at end of file
+diff --git a/.github/workflows/classroom.yml b/.github/workflows/classroom.yml
+index 2b33d92..8ce19cc 100644
+--- a/.github/workflows/classroom.yml
++++ b/.github/workflows/classroom.yml
+@@ -1,29 +1,16 @@
+-name: Autograding Tests
+-'on':
+-- push
+-- workflow_dispatch
+-- repository_dispatch
++name: GitHub Classroom Workflow
++
++on: [push]
++
+ permissions:
+   checks: write
+   actions: read
+   contents: read
++
+ jobs:
+-  run-autograding-tests:
++  build:
++    name: Autograding
+     runs-on: ubuntu-latest
+-    if: github.actor != 'github-classroom[bot]'
+     steps:
+-    - name: Checkout code
+-      uses: actions/checkout@v4
+-    - name: a4_tests
+-      id: a4_tests
+-      uses: education/autograding-python-grader@v1
+-      with:
+-        timeout: 30
+-        max-score: 10
+-        setup-command: pip3 install pytest torch numpy
+-    - name: Autograding Reporter
+-      uses: education/autograding-grading-reporter@v1
+-      env:
+-        A4_TESTS_RESULTS: "${{steps.a4_tests.outputs.result}}"
+-      with:
+-        runners: a4_tests
++      - uses: actions/checkout@v2
++      - uses: education/autograding@v1
